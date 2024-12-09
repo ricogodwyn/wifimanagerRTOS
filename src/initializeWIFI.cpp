@@ -7,10 +7,11 @@ void intitializeWIFI()
     // wm.resetSettings();
 
     bool res;
-    res = wm.autoConnect("AutoConnectAP"); // auto generated AP name from chipid
+    res = wm.autoConnect("AutoConnectAP", WIFI_PASSWORD); // auto generated AP name from chipid
     if (res)
     {
         Serial.println("Connected to WiFi");
+        Serial.println(WiFi.localIP());
     }
     else
     {

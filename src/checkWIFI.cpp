@@ -10,7 +10,6 @@ void checkWiFiConnection(void *pvParameters)
         if (WiFi.status() != WL_CONNECTED)
         {
             Serial.println("WiFi not connected, attempting to reconnect...");
-            WiFi.begin();
             unsigned long startAttemptTime = millis();
 
             // Wait for connection for 10 seconds
@@ -31,6 +30,7 @@ void checkWiFiConnection(void *pvParameters)
         }
         else
         {
+
             Serial.println("WIFI OK");
         }
 
