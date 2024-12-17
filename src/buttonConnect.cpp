@@ -4,16 +4,15 @@ int timeout = 120;
 bool portalRunning = false;
 void buttonConn(void *pvParameters)
 {
-    
+
     while (1)
     {
         if (digitalRead(BUTTON) == HIGH)
         {
             WiFiManager wm;
             server.stop();
-            // reset settings - for testing
-            wm.resetSettings();
 
+            wm.resetSettings();
             // set configportal timeout
             wm.setConfigPortalTimeout(timeout);
             if (!wm.startConfigPortal("OnDemandAP"))
@@ -27,6 +26,7 @@ void buttonConn(void *pvParameters)
 
             // if you get here you have connected to the WiFi
             Serial.println("connected...yeey :)");
+            Serial.println(WiFi.localIP());
             server.begin();
         }
         vTaskDelay(pdMS_TO_TICKS(10));

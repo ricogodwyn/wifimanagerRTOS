@@ -5,16 +5,16 @@ WiFiManager wm;
 void intitializeWIFI()
 {
     // wm.resetSettings();
-
-    bool res;
-    res = wm.autoConnect("AutoConnectAP", WIFI_PASSWORD); // auto generated AP name from chipid
-    if (res)
+    wm.setConnectTimeout(30);
+    wm.setConfigPortalTimeout(60);
+    if (!wm.autoConnect("AutoConnectAP", WIFI_PASSWORD))
     {
-        Serial.println("Connected to WiFi");
-        Serial.println(WiFi.localIP());
+        Serial.println("failed to connect and hit timeout");
+        delay(3000);
+        // reset and try again, or maybe put it to deep sleep
+        ESP.restart();
+        delay(5000);
     }
-    else
-    {
-        Serial.println("Failed to connect to WiFi");
-    }
+    Serial.println("connected to: ");
+    Serial.println(WiFi.localIP());
 }
