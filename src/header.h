@@ -13,7 +13,7 @@
 #define OTA_PASSWORD "112233"
 #define WIFI_USERNAME "admin"
 #define WIFI_PASSWORD "11223344"
-#define mqtt_broker "192.168.1.4" // Replace with your broker's IP
+#define mqtt_broker "192.168.1.13" // Replace with your broker's IP
 #define mqtt_port 1883
 #define write_topic "topic/write"
 #define read_topic "topic/read"

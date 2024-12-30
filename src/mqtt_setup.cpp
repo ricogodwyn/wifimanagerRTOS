@@ -18,6 +18,7 @@ void mqttCallback(char *topic, byte *message, unsigned int length)
 
     Serial.print("Message: ");
     String receivedMessage = "";
+
     for (int i = 0; i < length; i++)
     {
         receivedMessage += (char)message[i]; // Convert byte array to String
