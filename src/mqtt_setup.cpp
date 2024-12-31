@@ -25,10 +25,7 @@ void mqttCallback(char *topic, byte *message, unsigned int length)
     }
     Serial.println(receivedMessage);
 
-    if (strcmp(topic, read_topic) == 0)
-    {
-        readString(receivedMessage);
-    }
+    mqttCallbackHandle(topic, receivedMessage);
 }
 
 void reconnect()
@@ -49,6 +46,7 @@ void reconnect()
             // Resubscribe to topics
             client.subscribe(write_topic);
             client.subscribe(read_topic);
+            client.subscribe(servo_topic);
             Serial.print("Subscribed to: ");
             Serial.println(write_topic);
             Serial.print("Subscribed to: ");
@@ -61,19 +59,5 @@ void reconnect()
             Serial.println(". Trying again in 2 seconds...");
             delay(2000); // Wait before retrying
         }
-    }
-}
-
-void readString(String msg)
-{
-    if (msg.equals("1"))
-    {
-        digitalWrite(LED_YELLOW, HIGH);
-        Serial.println("LED ON");
-    }
-    else if (msg.equals("0"))
-    {
-        digitalWrite(LED_YELLOW, LOW);
-        Serial.println("LED OFF");
     }
 }

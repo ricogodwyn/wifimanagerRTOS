@@ -4,6 +4,8 @@
 #include <WiFiManager.h>
 #include <ElegantOTA.h>
 #include <PubSubClient.h>
+#include <Adafruit_PWMServoDriver.h>
+#include <SPI.h>
 
 #define LED_GREEN 5
 #define LED_YELLOW 4
@@ -13,11 +15,13 @@
 #define OTA_PASSWORD "112233"
 #define WIFI_USERNAME "admin"
 #define WIFI_PASSWORD "11223344"
-#define mqtt_broker "192.168.1.13" // Replace with your broker's IP
+#define mqtt_broker "192.168.1.17" // Replace with your broker's IP
 #define mqtt_port 1883
 #define write_topic "topic/write"
 #define read_topic "topic/read"
+#define servo_topic "topic/servo"
 
+extern Adafruit_PWMServoDriver pwm;
 extern PubSubClient client;
 extern WebServer server;
 void checkWiFiConnection(void *arg);
@@ -29,4 +33,7 @@ void InitializeRTOS();
 void initializeOTA();
 void setupMQTT();
 void reconnect();
+void mqttCallbackHandle(char *topic, String receivedMessage);
+void moveServos(int position);
+void stopServos();
 #endif // HEADER_H
