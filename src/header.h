@@ -24,11 +24,12 @@
 extern Adafruit_PWMServoDriver pwm;
 extern PubSubClient client;
 extern WebServer server;
+extern String brokerAddress;
 void checkWiFiConnection(void *arg);
 void buttonConn(void *arg);
 void serverHandle(void *arg);
 void publishMQTT(void *arg);
-void intitializeWIFI();
+void initializeWIFI();
 void InitializeRTOS();
 void initializeOTA();
 void setupMQTT();

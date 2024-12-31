@@ -10,7 +10,7 @@ void setup()
   digitalWrite(LED_BUILTIN, LOW);
   pwm.begin(); // Initialize PCA9685
   pwm.setPWMFreq(60);
-  intitializeWIFI();
+  initializeWIFI();
   InitializeRTOS();
   initializeOTA();
   setupMQTT();

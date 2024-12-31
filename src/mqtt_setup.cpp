@@ -1,12 +1,13 @@
 #include "header.h"
 WiFiClient espClient;
 PubSubClient client(espClient);
+
 void mqttCallback(char *topic, byte *message, unsigned int length);
 void reconnect();
 void readString(String msg);
 void setupMQTT()
 {
-    client.setServer(mqtt_broker, mqtt_port);
+    client.setServer(brokerAddress.c_str(), mqtt_port);
     client.setCallback(mqttCallback);
     reconnect();
 }
