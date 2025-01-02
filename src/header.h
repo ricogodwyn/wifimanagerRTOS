@@ -6,6 +6,7 @@
 #include <PubSubClient.h>
 #include <Adafruit_PWMServoDriver.h>
 #include <SPI.h>
+#include "servo.h"
 
 #define LED_GREEN 5
 #define LED_YELLOW 4
@@ -21,20 +22,23 @@
 #define read_topic "topic/read"
 #define servo_topic "topic/servo"
 
-extern Adafruit_PWMServoDriver pwm;
+// extern Adafruit_PWMServoDriver pwm;
 extern PubSubClient client;
 extern WebServer server;
 extern String brokerAddress;
+extern Servo servo;
+extern String receivedMessage;
+extern String receivedTopic;
+extern QueueHandle_t mqttQueue;
 void checkWiFiConnection(void *arg);
 void buttonConn(void *arg);
 void serverHandle(void *arg);
 void publishMQTT(void *arg);
+void servoMainFunc(void *arg);
 void initializeWIFI();
 void InitializeRTOS();
 void initializeOTA();
 void setupMQTT();
 void reconnect();
 void mqttCallbackHandle(char *topic, String receivedMessage);
-void moveServos(int position);
-void stopServos();
 #endif // HEADER_H

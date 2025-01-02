@@ -1,4 +1,5 @@
 #include "header.h"
+#include "servo.h"
 #define INCREMENT 10
 void readString(String msg);
 void serialRead()
@@ -27,33 +28,11 @@ void publishMQTT(void *pvParameters)
     }
 }
 
-void mqttCallbackHandle(char *topic, String receivedMessage)
+void mqttCallbackHandle(char *topic, String receivedMessage) // delete this
 {
     if (strcmp(topic, read_topic) == 0)
     {
         readString(receivedMessage);
-    }
-    if (strcmp(topic, servo_topic) == 0)
-    {
-        if (receivedMessage == "FORWARD")
-        { // Move servos forward
-            moveServos(INCREMENT);
-            Serial.println("FORWARD");
-        }
-        else if (receivedMessage == "BACKWARD")
-        { // Move servos backward
-            moveServos(-INCREMENT);
-            Serial.println("BACKWARD");
-        }
-        else if (receivedMessage == "STOP")
-        { // Stop servos
-            stopServos();
-            Serial.println("STOP");
-        }
-        else
-        {
-            Serial.println("Invalid command. Use 'FORWARD', 'BACKWARD', or 'STOP'.");
-        }
     }
 }
 void readString(String msg)
@@ -71,4 +50,4 @@ void readString(String msg)
 }
 // mosquitto_sub -h 192.168.1.4 -t topic/write
 // mosquitto_pub -h 192.168.1.4 -t topic/read -m "Hello, MQTT!"
-// mosquitto_pub -h 192.168.1.4 -t topic/servo -m "FORWARD"
+// mosquitto_pub -h 192.168.1.4 -t topic/servo -m "MOVE"

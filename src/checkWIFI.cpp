@@ -28,11 +28,6 @@ void checkWiFiConnection(void *pvParameters)
                 Serial.println("Failed to reconnect to WiFi");
             }
         }
-        else
-        {
-
-            Serial.println("WIFI OK");
-        }
 
         vTaskDelay(pdMS_TO_TICKS(5000));
     }

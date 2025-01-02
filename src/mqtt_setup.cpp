@@ -1,7 +1,8 @@
 #include "header.h"
 WiFiClient espClient;
 PubSubClient client(espClient);
-
+String receivedMessage = "";
+String receivedTopic = "";
 void mqttCallback(char *topic, byte *message, unsigned int length);
 void reconnect();
 void readString(String msg);
@@ -18,8 +19,6 @@ void mqttCallback(char *topic, byte *message, unsigned int length)
     Serial.println(topic);
 
     Serial.print("Message: ");
-    String receivedMessage = "";
-
     for (int i = 0; i < length; i++)
     {
         receivedMessage += (char)message[i]; // Convert byte array to String
@@ -52,6 +51,8 @@ void reconnect()
             Serial.println(write_topic);
             Serial.print("Subscribed to: ");
             Serial.println(read_topic);
+            Serial.print("Subscribed to: ");
+            Serial.println(servo_topic);
         }
         else
         {
