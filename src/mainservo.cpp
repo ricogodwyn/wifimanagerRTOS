@@ -4,7 +4,7 @@ void servoMainFunc(void *pvParameters)
 {
     while (1)
     {
-        if (receivedMessage.equals("MOVE"))
+        if (receivedMessage.equals("MOVE")) // receivedmMessage is retrieved by mqtt
         {
             servo.movePerID(2, 200); // first param is servo id, second param is the position
             receivedMessage = "";
