@@ -1,7 +1,8 @@
 #include <Arduino.h>
 #include "header.h"
+//num_pins
+Servo servo(5);
 
-Servo servo(5, 150, 600);
 
 void setup()
 {

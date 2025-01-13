@@ -5,14 +5,13 @@ class Servo
 {
 private:
     int numPins;
-    int pwmMin;
-    int pwmMax;
 
 public:
     Servo() {}
-    Servo(int numPins = 6, int pwmMin = 150, int pwmMax = 600);
+    Servo(int numPins = 6);
     void init();
-    void movePerID(int servoID, int pos);
+    void moveForwardPerID(int servoID, int pwmMin, int pwmMax);
+    void moveBackwardPerID(int servoID, int pwmMin, int pwmMax);
 };
 
 #endif // SERVO_H

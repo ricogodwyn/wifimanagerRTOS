@@ -48,6 +48,6 @@ void readString(String msg)
         Serial.println("LED OFF");
     }
 }
-// mosquitto_sub -h 192.168.1.4 -t topic/write
+// mosquitto_sub -h 192.168.88.147 -t topic/servo
 // mosquitto_pub -h 192.168.1.4 -t topic/read -m "Hello, MQTT!"
 // mosquitto_pub -h 192.168.1.4 -t topic/servo -m "MOVE"
