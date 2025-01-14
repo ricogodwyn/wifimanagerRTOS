@@ -13,22 +13,32 @@
 #define SERVOMIN5  140 // This is the 'minimum' pulse length count (out of 4096)
 #define SERVOMAX5  310 // This is the 'maximum' pulse length count (out of 4096)
 
+int* currentPosition;
 void servoMainFunc(void *pvParameters)
 {
     while (1)
     {
-        if (receivedMessage.equals("MOVE FORWARD")) // receivedmMessage is retrieved by mqtt
-        {
-            servo.moveForwardPerID(0, SERVOMIN0, SERVOMAX0); // first param is servo id, second param is the servo min, 3rd is the servo max
-            servo.moveForwardPerID(1, SERVOMIN1,SERVOMAX1);
+        if (receivedMessage.indexOf(',')!=-1){
+            int commaIndex=receivedMessage.indexOf(',');
+            int servoID = receivedMessage.substring(0,commaIndex).toInt();
+            int targetPosition = receivedMessage.substring(commaIndex + 1).toInt();
+            if (servoID >= 0 && servoID < servo.getNumPins()) {
+                Serial.print("Servo ");
+                Serial.print(servoID);
+                Serial.print(" moving from ");
+                Serial.print(currentPosition[servoID]);
+                Serial.print(" to ");
+                Serial.println(targetPosition);
+
+                if (targetPosition > currentPosition[servoID]) {
+                    servo.moveForwardPerID(servoID, currentPosition[servoID], targetPosition);
+                } else {
+                    servo.moveBackwardPerID(servoID, currentPosition[servoID], targetPosition);
+                }
+                currentPosition[servoID] = targetPosition;
+            }
             receivedMessage = "";
-        }
-        if(receivedMessage.equals("MOVE BACKWARD")){
-            servo.moveBackwardPerID(0, SERVOMIN0, SERVOMAX0);
-            servo.moveBackwardPerID(1, SERVOMIN1,SERVOMAX1);
-            receivedMessage="";
-        }
-        vTaskDelay(pdMS_TO_TICKS(100));
+            }
     }
 }
 

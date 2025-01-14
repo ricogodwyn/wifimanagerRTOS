@@ -41,4 +41,7 @@ void initializeOTA();
 void setupMQTT();
 void reconnect();
 void mqttCallbackHandle(char *topic, String receivedMessage);
+
+extern int* currentPosition;
+
 #endif // HEADER_H

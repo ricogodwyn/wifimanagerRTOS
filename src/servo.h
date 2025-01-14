@@ -12,6 +12,7 @@ public:
     void init();
     void moveForwardPerID(int servoID, int pwmMin, int pwmMax);
     void moveBackwardPerID(int servoID, int pwmMin, int pwmMax);
+    int getNumPins() const;
 };
 
 #endif // SERVO_H
