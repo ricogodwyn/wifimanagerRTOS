@@ -6,7 +6,6 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 Servo::Servo(int numPins)
 {
     this->numPins = numPins;
-    
 }
 
 void Servo::init()
@@ -17,6 +16,11 @@ void Servo::init()
     pwm.setPWMFreq(50);
     Serial.print("num of pins: ");
     Serial.println(numPins);
+    int resetPosition = 140;
+    for (int i = 0; i < numPins; ++i) {
+        pwm.setPWM(i, 0, resetPosition);
+    }
+    Serial.println("All servos reset to position 140");
 }
 void Servo::moveForwardPerID(int servoID, int pwmMin, int pwmMax)
 {
@@ -34,4 +38,8 @@ void Servo::moveBackwardPerID(int servoID, int pwmMin, int pwmMax){
     Serial.print("Moved Backward Servo: ");
     Serial.println(servoID);
 
+}
+
+int Servo::getNumPins() const{
+    return numPins;
 }

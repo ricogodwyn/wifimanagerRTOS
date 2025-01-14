@@ -13,6 +13,11 @@ void setup()
   digitalWrite(LED_BUILTIN, LOW);
   // setup pca
   servo.init();
+  int numPins = servo.getNumPins();
+    currentPosition = new int[numPins];
+    for (int i = 0; i < numPins; ++i) {
+        currentPosition[i] = 0; // Initialize all positions to 0
+  }
   //
   initializeWIFI();
   InitializeRTOS();
