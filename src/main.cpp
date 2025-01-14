@@ -2,12 +2,12 @@
 #include "header.h"
 //num_pins
 Servo servo(5);
-
+int* currentPosition;
 
 void setup()
 {
   Serial.begin(115200);
-  Serial.println("begin");
+  Serial.println("begins");
   pinMode(BUTTON, INPUT_PULLDOWN);
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, LOW);
@@ -16,13 +16,15 @@ void setup()
   int numPins = servo.getNumPins();
     currentPosition = new int[numPins];
     for (int i = 0; i < numPins; ++i) {
-        currentPosition[i] = 0; // Initialize all positions to 0
-  }
+        currentPosition[i] = 140; // Initialize all positions to 0
+    }
   //
   initializeWIFI();
   InitializeRTOS();
   initializeOTA();
+
   setupMQTT();
+
   pinMode(LED_GREEN, OUTPUT);
   pinMode(LED_YELLOW, OUTPUT);
 }
